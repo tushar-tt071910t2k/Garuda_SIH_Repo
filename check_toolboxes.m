@@ -1,0 +1,12 @@
+disp('=== Checking Toolboxes ===');
+v = ver;
+names = {v.Name};
+hasADT = any(strcmp(names, 'Automated Driving Toolbox'));
+hasNavT = any(strcmp(names, 'Navigation Toolbox'));
+hasDLT = any(strcmp(names, 'Deep Learning Toolbox'));
+fprintf('Automated Driving Toolbox: %s\n', mat2str(hasADT));
+fprintf('Navigation Toolbox: %s\n', mat2str(hasNavT));
+fprintf('Deep Learning Toolbox: %s\n', mat2str(hasDLT));
+fprintf('MATLAB version: %s\n', version);
+disp('=== Done ===');
+exit;

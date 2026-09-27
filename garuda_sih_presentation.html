@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GARUDA — SIH 2026 Presentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800;900&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#0a1628; --blue:#1a3a6e; --accent:#e8a020; --green:#1d9e5e;
+  --red:#d63031; --white:#fff; --light:#f0f4fa; --gray:#6b7280;
+  --teal:#0e7490; --purple:#7c3aed;
+}
+body{font-family:'Barlow',sans-serif;background:#111827;display:flex;flex-direction:column;align-items:center;padding:24px;gap:24px;}
+.slide{width:1280px;min-height:720px;background:white;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,.6);}
+
+/* HEADER */
+.sh{background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:10px 28px;min-height:60px;flex-shrink:0;}
+.team-badge{background:white;color:var(--navy);font-weight:900;font-size:12px;padding:4px 14px;border-radius:20px;letter-spacing:1px;}
+.sh-title{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:white;letter-spacing:3px;text-transform:uppercase;text-align:center;flex:1;}
+.sih-badge{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.sih-brain{width:42px;height:42px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.sih-txt{font-size:7px;color:white;font-weight:800;letter-spacing:.8px;text-align:center;line-height:1.2;}
+
+/* FOOTER */
+.sf{background:var(--navy);height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;flex-shrink:0;}
+.sf-brand{display:flex;align-items:center;gap:6px;color:white;font-size:12px;font-weight:700;}
+.sf-tag{color:#64748b;font-size:10px;font-style:italic;}
+.sf-pg{color:#64748b;font-size:11px;font-weight:600;}
+
+/* BODY */
+.sb{flex:1;padding:16px 26px;overflow:hidden;}
+
+/* ── HELPERS ── */
+.card{background:var(--light);border-radius:10px;padding:12px 14px;border-left:4px solid var(--blue);}
+.card.red{border-left-color:var(--red);}
+.card.gold{border-left-color:var(--accent);}
+.card.green{border-left-color:var(--green);}
+.card.teal{border-left-color:var(--teal);}
+.card.purple{border-left-color:var(--purple);}
+.card h4{font-size:12px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
+.card p,.card li{font-size:11.5px;color:#374151;line-height:1.6;}
+.card ul{padding-left:14px;}
+
+.section-lbl{font-size:10px;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+
+/* Numbered box */
+.n-box{border-radius:99px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:white;flex-shrink:0;}
+
+/* Risk badge */
+.risk{display:inline-block;padding:2px 10px;border-radius:99px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;}
+.risk.critical{background:rgba(214,48,49,.15);color:#d63031;}
+.risk.high{background:rgba(232,160,32,.15);color:#b45309;}
+.risk.pass{background:rgba(29,158,94,.15);color:#1d9e5e;}
+
+/* ══════════════ SLIDE 1 COVER ══════════════ */
+.s1-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 25% 55%,rgba(26,58,110,.9) 0%,transparent 60%),radial-gradient(ellipse at 75% 20%,rgba(14,116,144,.5) 0%,transparent 50%),var(--navy);}
+.s1-content{position:relative;z-index:2;flex:1;display:flex;padding:0 56px;align-items:center;gap:0;}
+.s1-left{flex:1;display:flex;flex-direction:column;gap:14px;}
+.s1-chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;display:inline-flex;align-items:center;gap:8px;padding:7px 18px;width:fit-content;}
+.s1-chip span{color:#94a3b8;font-size:12px;font-weight:600;letter-spacing:2px;}
+.s1-chip strong{color:white;font-size:12px;font-weight:800;letter-spacing:2px;}
+.s1-main{font-family:'Barlow Condensed',sans-serif;font-size:90px;font-weight:900;color:white;line-height:.9;letter-spacing:-1px;}
+.s1-main .acc{color:var(--accent);}
+.s1-sub{font-size:16px;color:#94a3b8;letter-spacing:.5px;}
+.s1-headline{font-size:20px;font-weight:700;color:white;background:linear-gradient(135deg,#0e7490,#667eea);padding:10px 22px;border-radius:6px;display:inline-block;}
+.s1-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.pill{padding:5px 14px;border-radius:99px;font-size:12px;font-weight:700;}
+.pill-b{background:rgba(14,116,144,.22);border:1px solid rgba(14,116,144,.45);color:#67e8f9;}
+.pill-g{background:rgba(232,160,32,.18);border:1px solid rgba(232,160,32,.4);color:var(--accent);}
+.pill-gr{background:rgba(29,158,94,.18);border:1px solid rgba(29,158,94,.4);color:#4ade80;}
+.pill-p{background:rgba(124,58,237,.18);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;}
+.s1-right{display:flex;flex-direction:column;gap:12px;align-items:flex-end;}
+.stat-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-left:3px solid var(--accent);border-radius:8px;padding:12px 20px;text-align:right;min-width:170px;}
+.stat-box .sv{font-family:'Barlow Condensed',sans-serif;font-size:42px;font-weight:900;color:var(--accent);line-height:1;}
+.stat-box .sl{font-size:10px;color:#94a3b8;letter-spacing:.8px;text-transform:uppercase;}
+
+/* ══════════════ PIPELINE STRIP ══════════════ */
+.pipe-strip{display:flex;align-items:stretch;border-radius:10px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1);}
+.ps{flex:1;padding:12px 6px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;}
+.ps::after{content:'▶';position:absolute;right:-9px;top:50%;transform:translateY(-50%);font-size:13px;color:white;z-index:2;}
+.ps:last-child::after{display:none;}
+.ps .pn{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.25);font-size:9px;font-weight:900;color:white;display:flex;align-items:center;justify-content:center;}
+.ps .pi{font-size:22px;}
+.ps .pname{font-size:10px;font-weight:800;color:white;line-height:1.2;text-align:center;}
+.ps .pdesc{font-size:8.5px;color:rgba(255,255,255,.75);text-align:center;line-height:1.3;}
+.c1{background:#1e40af;}.c2{background:#0e7490;}.c3{background:#d97706;}
+.c4{background:var(--purple);}.c5{background:#065f46;}.c6{background:#b91c1c;}
+
+/* ══════════════ FEATURE CARDS ══════════════ */
+.feat-row{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;height:calc(100% - 54px);}
+.fc{background:white;border:1px solid #e5e7eb;border-radius:10px;padding:10px 7px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.fc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.fc1::before{background:#1e40af;} .fc2::before{background:#0e7490;} .fc3::before{background:#d97706;}
+.fc4::before{background:var(--purple);} .fc5::before{background:#065f46;} .fc6::before{background:#b91c1c;}
+.fc7::before{background:#be185d;}
+.fc .fcn{width:20px;height:20px;border-radius:50%;font-size:9px;font-weight:900;color:white;display:flex;align-items:center;justify-content:center;margin-bottom:5px;}
+.fc1 .fcn{background:#1e40af;} .fc2 .fcn{background:#0e7490;} .fc3 .fcn{background:#d97706;}
+.fc4 .fcn{background:var(--purple);} .fc5 .fcn{background:#065f46;} .fc6 .fcn{background:#b91c1c;} .fc7 .fcn{background:#be185d;}
+.fc .fci{font-size:26px;margin-bottom:4px;}
+.fc .fcname{font-size:10.5px;font-weight:800;color:var(--navy);line-height:1.2;margin-bottom:7px;}
+.fc .fcp{font-size:9px;color:#374151;line-height:1.55;text-align:left;width:100%;}
+.fc .fcp li{margin-bottom:2px;}
+
+/* ══════════════ ARCH LEVELS ══════════════ */
+.arch-body{display:flex;flex-direction:column;gap:7px;height:calc(100% - 50px);}
+.arch-lv{background:white;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;display:flex;}
+.al-lbl{width:120px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;padding:6px 10px;font-size:8px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:white;}
+.al1{background:#1e40af;} .al2{background:#0e7490;} .al3{background:var(--purple);}
+.al4{background:#d97706;} .al5{background:#065f46;}
+.al-content{flex:1;padding:7px 12px;display:flex;align-items:center;gap:7px;}
+.al-box{background:var(--light);border-radius:6px;padding:6px 8px;text-align:center;flex:1;border:1px solid #e5e7eb;}
+.al-box .abi{font-size:15px;}
+.al-box .abn{font-size:9.5px;font-weight:800;color:var(--navy);line-height:1.2;margin:2px 0;}
+.al-box .abd{font-size:8px;color:var(--gray);line-height:1.3;}
+.al-arr{font-size:15px;color:#94a3b8;flex-shrink:0;}
+.al3-dark{background:#0f172a !important;border-color:#334155 !important;}
+.al3-dark .al-box{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);}
+.al3-dark .abn{color:white !important;}
+.al3-dark .abd{color:#94a3b8 !important;}
+.al3-dark .al-arr{color:var(--accent) !important;}
+.al-core{background:linear-gradient(135deg,#1e3a5f,#0e7490);border-radius:6px;padding:8px 12px;text-align:center;color:white;flex:2;border:1px solid rgba(255,255,255,.15);}
+.al-core .acn{font-size:10px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:var(--accent);}
+.al-core .acs{display:flex;gap:5px;margin-top:4px;justify-content:center;flex-wrap:wrap;}
+.al-core .acs span{background:rgba(255,255,255,.1);border-radius:3px;padding:2px 6px;font-size:8.5px;color:#e2e8f0;}
+
+/* ══════════════ TECH APPROACH ══════════════ */
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;height:100%;}
+.ml-panel{background:var(--navy);border-radius:10px;padding:14px;color:white;display:flex;flex-direction:column;gap:7px;}
+.ml-panel h3{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;color:var(--accent);letter-spacing:1px;}
+.ml-box{border-radius:6px;padding:8px 10px;text-align:center;}
+.ml-box .mn{font-size:10px;font-weight:800;color:white;}
+.ml-box .ms{font-size:9px;color:rgba(255,255,255,.7);margin-top:2px;}
+.mlb1{background:#1e40af;} .mlb2{background:#0e7490;} .mlb3{background:var(--purple);}
+.mlb4{background:#065f46;} .mlb5{background:#b91c1c;}
+.ml-row{display:flex;gap:6px;}
+.flow-arr{text-align:center;color:var(--accent);font-size:15px;font-weight:900;}
+.fusion{background:linear-gradient(135deg,#d97706,#f59e0b);border-radius:6px;padding:8px 12px;text-align:center;}
+.fusion .ft{font-size:11px;font-weight:900;color:#1a1a1a;}
+.fusion .fs{font-size:9px;color:rgba(0,0,0,.6);}
+.output{background:linear-gradient(135deg,#065f46,#10b981);border-radius:6px;padding:10px;text-align:center;}
+.output .ot{font-size:12px;font-weight:900;color:white;}
+.output .os{font-size:9.5px;color:rgba(255,255,255,.8);}
+
+.sc-panel{display:flex;flex-direction:column;gap:8px;}
+.sc-panel h3{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:900;color:var(--navy);}
+.sc-card{background:white;border-radius:8px;padding:10px 12px;border:1px solid #e5e7eb;box-shadow:0 2px 6px rgba(0,0,0,.05);}
+.sc-card .sc-hdr{display:flex;align-items:center;gap:7px;margin-bottom:5px;}
+.sc-card .sc-ico{font-size:18px;}
+.sc-card .sc-nm{font-size:11px;font-weight:800;color:var(--navy);}
+.sc-card .sc-tag{display:inline-block;background:var(--light);border-radius:4px;padding:1px 6px;font-size:8.5px;font-weight:700;color:var(--blue);margin-bottom:4px;}
+.sc-card .sc-pts{font-size:9.5px;color:#374151;line-height:1.55;}
+
+/* ══════════════ RESULTS ══════════════ */
+.results-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;height:100%;}
+.rc{display:flex;flex-direction:column;gap:9px;}
+.metric-big{background:var(--navy);border-radius:10px;padding:14px;text-align:center;color:white;}
+.metric-big .mv{font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:900;color:var(--accent);line-height:1;}
+.metric-big .mu{font-size:18px;color:var(--accent);}
+.metric-big .ml2{font-size:11px;color:#94a3b8;margin-top:3px;font-weight:600;}
+.metric-big .ms2{font-size:9.5px;color:#475569;margin-top:2px;}
+
+.ct{background:white;border-radius:10px;overflow:hidden;border:1px solid #e5e7eb;flex:1;}
+.ct-head{background:var(--navy);color:white;display:grid;padding:6px 10px;font-size:9.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
+.ct-row2{display:grid;padding:6px 10px;font-size:10px;border-bottom:1px solid #f3f4f6;align-items:center;}
+.ct-row2:nth-child(even){background:#f8fafc;}
+.ct-bad{color:var(--red);font-weight:700;}
+.ct-good{color:var(--green);font-weight:700;}
+.ct-metric{font-weight:600;color:var(--navy);}
+
+.bar-panel{background:white;border-radius:10px;padding:12px;border:1px solid #e5e7eb;flex:1;}
+.bar-panel h4{font-size:11px;font-weight:800;color:var(--navy);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;}
+.bi{margin-bottom:7px;}
+.bi-hdr{display:flex;justify-content:space-between;font-size:10px;color:var(--navy);font-weight:600;margin-bottom:3px;}
+.bt{height:9px;background:#f3f4f6;border-radius:5px;overflow:hidden;}
+.bf{height:100%;border-radius:5px;}
+
+/* ══════════════ SCENARIO RESULTS TABLE ══════════════ */
+.srt{background:white;border-radius:10px;overflow:hidden;border:1px solid #e5e7eb;width:100%;}
+.srt-head{background:var(--navy);color:white;display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr 1fr 1fr;padding:7px 12px;font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;}
+.srt-row{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr 1fr 1fr;padding:7px 12px;font-size:10px;border-bottom:1px solid #f3f4f6;align-items:center;}
+.srt-row:nth-child(even){background:#f8fafc;}
+.srt-row:last-child{border-bottom:none;}
+
+/* ══════════════ ROADMAP ══════════════ */
+.rm-row{background:white;border-radius:10px;overflow:hidden;display:flex;border:1px solid #e5e7eb;margin-bottom:10px;box-shadow:0 2px 6px rgba(0,0,0,.05);}
+.ph-lbl{width:140px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;padding:12px 14px;color:white;}
+.ph1{background:#1e40af;} .ph2{background:#0e7490;} .ph3{background:var(--purple);} .ph4{background:#065f46;}
+.ph-lbl .pht{font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;opacity:.75;}
+.ph-lbl .phn{font-size:13px;font-weight:900;line-height:1.2;margin:3px 0;}
+.ph-lbl .phd{font-size:9.5px;opacity:.8;background:rgba(255,255,255,.15);border-radius:4px;padding:1px 7px;display:inline-block;}
+.ph-content{flex:1;padding:10px 16px;display:flex;gap:12px;align-items:center;}
+.ph-item{display:flex;align-items:flex-start;gap:6px;flex:1;}
+.ph-chk{width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;margin-top:1px;}
+.ph-txt{font-size:10.5px;color:#374151;line-height:1.4;}
+.ph-txt strong{color:var(--navy);display:block;font-weight:700;}
+
+/* ══════════════ WHY SECTION ══════════════ */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;height:100%;}
+.diff-card{background:white;border-radius:10px;padding:12px 14px;border:1px solid #e5e7eb;display:flex;gap:10px;align-items:flex-start;box-shadow:0 2px 6px rgba(0,0,0,.05);}
+.di-wrap{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.di1{background:#dbeafe;} .di2{background:#d1fae5;} .di3{background:#fef3c7;}
+.di4{background:#ede9fe;} .di5{background:#fee2e2;} .di6{background:#cffafe;}
+.di-title{font-size:12.5px;font-weight:800;color:var(--navy);margin-bottom:3px;}
+.di-body{font-size:10.5px;color:#374151;line-height:1.5;}
+.di-tag{display:inline-block;background:var(--navy);color:white;border-radius:3px;padding:1px 7px;font-size:8.5px;font-weight:700;margin-top:4px;}
+
+.mkt-box{background:var(--navy);border-radius:10px;padding:14px;color:white;}
+.mkt-box h3{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:900;color:var(--accent);margin-bottom:10px;}
+.mkt-stats{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px;}
+.ms-item{background:rgba(255,255,255,.06);border-radius:6px;padding:8px;text-align:center;}
+.ms-item .msv{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:var(--accent);}
+.ms-item .msl{font-size:9px;color:#94a3b8;margin-top:2px;}
+.uc-list{display:flex;flex-direction:column;gap:5px;}
+.uc-item{display:flex;align-items:center;gap:6px;font-size:10.5px;color:#e2e8f0;}
+.uc-chk{color:var(--accent);font-size:11px;}
+
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px;}
+.tc{background:white;border-radius:10px;padding:16px 12px;text-align:center;border:1px solid #e5e7eb;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.tc-av{width:52px;height:52px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:24px;border:3px solid var(--navy);}
+.tc-nm{font-size:12px;font-weight:800;color:var(--navy);margin-bottom:2px;}
+.tc-role{font-size:10px;color:var(--gray);margin-bottom:6px;}
+.tc-sk{font-size:9.5px;color:var(--blue);font-weight:600;line-height:1.4;}
+.sih-meta{background:var(--navy);border-radius:10px;padding:14px 20px;color:white;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;text-align:center;}
+.sm-item .smv{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;color:var(--accent);}
+.sm-item .sml{font-size:9px;color:#94a3b8;margin-top:2px;}
+
+/* CLOSING */
+.close-body{display:flex;flex:1;overflow:hidden;}
+.close-left{flex:1.2;background:var(--navy);padding:28px 32px;display:flex;flex-direction:column;justify-content:center;color:white;}
+.close-right{flex:1;background:var(--light);padding:20px 22px;display:flex;flex-direction:column;justify-content:center;gap:10px;}
+
+@media print{body{background:white;padding:0;gap:0;}.slide{box-shadow:none;page-break-after:always;}}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 1 — COVER
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="s1-bg"></div>
+  <div class="s1-content">
+    <div class="s1-left">
+      <div class="s1-chip">
+        <span>TEAM</span><strong>DECEPTICON</strong><span>·</span><strong>SMART INDIA HACKATHON 2026</strong>
+      </div>
+      <div style="font-size:64px;filter:drop-shadow(0 0 28px rgba(232,160,32,.6));">🦅</div>
+      <div class="s1-main"><span class="acc">G</span>ARUDA</div>
+      <div class="s1-sub">AI-Powered Adaptive Path Planning & Collision Avoidance<br>for Autonomous Vehicles on Unstructured Indian Roads</div>
+      <div class="s1-headline">India's First Unstructured-Road-Native AV Stack</div>
+      <div class="s1-pills">
+        <span class="pill pill-b">🧠 YOLO Object Detection</span>
+        <span class="pill pill-g">⚡ Dynamic Risk Fields</span>
+        <span class="pill pill-gr">🗺️ DeepLabv3+ Segmentation</span>
+        <span class="pill pill-p">🏎️ CNN Behavioural Cloning</span>
+        <span class="pill pill-b">🎮 MATLAB Simulation Suite</span>
+      </div>
+    </div>
+    <div class="s1-right" style="margin-left:40px;">
+      <div class="stat-box"><div class="sv">5/5</div><div class="sl">Scenarios Passed</div></div>
+      <div class="stat-box"><div class="sv">0</div><div class="sl">Collisions Recorded</div></div>
+      <div class="stat-box"><div class="sv">20<span style="font-size:22px">Hz</span></div><div class="sl">Frame Processing Rate</div></div>
+      <div class="stat-box"><div class="sv">50<span style="font-size:22px">ms</span></div><div class="sl">Avg Replanning Latency</div></div>
+      <div class="stat-box"><div class="sv">3</div><div class="sl">Deep Learning Models</div></div>
+    </div>
+  </div>
+  <div class="sf" style="position:relative;z-index:2;">
+    <div class="sf-brand">🦅 GARUDA · DeceptiCon</div>
+    <div class="sf-tag">Where Western AV stacks fail — GARUDA prevails</div>
+    <div class="sf-pg">1 / 12</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 2 — PROBLEM STATEMENT
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="team-badge">DECEPTICON</div>
+    <div class="sh-title">THE PROBLEM</div>
+    <div class="sih-badge"><div class="sih-brain">🧠</div><div class="sih-txt">SMART INDIA<br>HACKATHON 2026</div></div>
+  </div>
+  <div class="sb">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;height:100%;">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="card red">
+          <h4>🌍 SIH Problem Statement & Motivation</h4>
+          <p>Conventional autonomous-driving systems are developed around <strong>structured roads with clear lane markings, predictable traffic flow, standardised signage, and controlled intersections.</strong> Indian roads frequently contain heterogeneous road users and less predictable behaviour — cars, buses, trucks, autos, two-wheelers, bicycles, pedestrians, pushcarts, and animals sharing the same road space.</p>
+        </div>
+        <div class="card">
+          <h4>🚨 8 Unstructured Hazard Classes — Unhandled by Western AVs</h4>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:4px;">
+            <div style="background:white;border-radius:7px;padding:7px;text-align:center;border:1px solid #e5e7eb;">
+              <div style="font-size:20px;">🐄</div><div style="font-size:9px;font-weight:700;color:var(--navy);margin-top:2px;">Cattle</div>
+            </div>
+            <div style="background:white;border-radius:7px;padding:7px;text-align:center;border:1px solid #e5e7eb;">
+              <div style="font-size:20px;">🛺</div><div style="font-size:9px;font-weight:700;color:var(--navy);margin-top:2px;">Auto-Rickshaw</div>
+            </div>
+            <div style="background:white;border-radius:7px;padding:7px;text-align:center;border:1px solid #e5e7eb;">
+              <div style="font-size:20px;">🕳️</div><div style="font-size:9px;font-weight:700;color:var(--navy);margin-top:2px;">Potholes</div>
+            </div>
+            <div style="background:white;border-radius:7px;padding:7px;text-align:center;border:1px solid #e5e7eb;">
+              <div style="font-size:20px;">🚶</div><div style="font-size:9px;font-weight:700;color:var(--navy);margin-top:2px;">Pedestrians</div>
+            </div>
+            <div style="background:white;border-radius:7px;padding:7px;text-align:center;border:1px solid #e5e7eb;">
+              <div style="font-size:20px;">🛒</div><div style="font-size:9px;font-weight:700;color:var(--navy);margin-top:2px;">Pushcarts</div>
+            </div>
+            <div style="background:white;border-radius:7px;padding:7px;text-align:center;border:1px solid #e5e7eb;">
+              <div style="font-size:20px;">🚲</div><div style="font-size:9px;font-weight:700;color:var(--navy);margin-top:2px;">Bicycles</div>
+            </div>
+            <div style="background:white;border-radius:7px;padding:7px;text-align:center;border:1px solid #e5e7eb;">
+              <div style="font-size:20px;">🏗️</div><div style="font-size:9px;font-weight:700;color:var(--navy);margin-top:2px;">Encroachment</div>
+            </div>
+            <div style="background:white;border-radius:7px;padding:7px;text-align:center;border:1px solid #e5e7eb;">
+              <div style="font-size:20px;">🌊</div><div style="font-size:9px;font-weight:700;color:var(--navy);margin-top:2px;">Waterlogging</div>
+            </div>
+          </div>
+        </div>
+        <div class="card gold">
+          <h4>📊 Scale of the Problem</h4>
+          <p>India records <strong>~1.5 lakh road fatalities/year</strong> — world's highest. 70% of national highways pass through unstructured corridors. Without India-native AV intelligence, mass deployment of autonomous vehicles is impossible and dangerous.</p>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="background:var(--navy);border-radius:10px;padding:14px;color:white;flex:1;">
+          <div style="text-align:center;margin-bottom:10px;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:900;color:var(--accent);letter-spacing:1px;">CONVENTIONAL AV vs. INDIA REALITY</div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;">
+            <div style="text-align:right;font-size:10px;font-weight:700;color:#94a3b8;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:5px;margin-bottom:5px;">Western AV Assumption</div>
+            <div style="text-align:center;font-size:10px;font-weight:900;color:var(--accent);border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:5px;margin-bottom:5px;">vs.</div>
+            <div style="text-align:left;font-size:10px;font-weight:700;color:#94a3b8;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:5px;margin-bottom:5px;">Indian Road Reality</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;">
+            <div style="text-align:right;font-size:10px;color:#fca5a5;">Lane-following logic</div><div style="font-size:11px;color:#64748b;text-align:center;">→</div><div style="font-size:10px;color:#86efac;">Lane-less free-flow</div>
+            <div style="text-align:right;font-size:10px;color:#fca5a5;">Static obstacle map</div><div style="font-size:11px;color:#64748b;text-align:center;">→</div><div style="font-size:10px;color:#86efac;">Live dynamic actors</div>
+            <div style="text-align:right;font-size:10px;color:#fca5a5;">3-class perception</div><div style="font-size:11px;color:#64748b;text-align:center;">→</div><div style="font-size:10px;color:#86efac;">8+ hazard classes</div>
+            <div style="text-align:right;font-size:10px;color:#fca5a5;">Grid replanning</div><div style="font-size:11px;color:#64748b;text-align:center;">→</div><div style="font-size:10px;color:#86efac;">Risk-field bending</div>
+            <div style="text-align:right;font-size:10px;color:#fca5a5;">Planning deadlock</div><div style="font-size:11px;color:#64748b;text-align:center;">→</div><div style="font-size:10px;color:#86efac;">Continuous motion</div>
+            <div style="text-align:right;font-size:10px;color:#fca5a5;">Structured intersection</div><div style="font-size:11px;color:#64748b;text-align:center;">→</div><div style="font-size:10px;color:#86efac;">Signal-free chaos</div>
+            <div style="text-align:right;font-size:10px;color:#fca5a5;">No animal handling</div><div style="font-size:11px;color:#64748b;text-align:center;">→</div><div style="font-size:10px;color:#86efac;">Cattle-crossing state</div>
+          </div>
+        </div>
+        <div class="card green">
+          <h4>🎯 Project Objective (from Documentation)</h4>
+          <ul>
+            <li>Build a MATLAB/Simulink autonomous-navigation simulation pipeline</li>
+            <li>Validate on all <strong>five India-specific road scenarios</strong></li>
+            <li>Add YOLO object detection + DeepLabv3+ road segmentation</li>
+            <li>ReLU-based CNN for learned steering and speed prediction</li>
+            <li>Combine learned perception with <strong>deterministic collision-avoidance rules</strong></li>
+            <li>Generate measurable results: completion, clearance, braking events, latency</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><div class="sf-brand">🦅 GARUDA</div><div class="sf-tag">India's roads demand India-native intelligence</div><div class="sf-pg">2 / 12</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 3 — PROPOSED SOLUTION
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh"><div class="team-badge">DECEPTICON</div><div class="sh-title">PROPOSED SOLUTION</div><div class="sih-badge"><div class="sih-brain">🧠</div><div class="sih-txt">SMART INDIA<br>HACKATHON 2026</div></div></div>
+  <div class="sb">
+    <div style="background:var(--navy);border-radius:10px;padding:13px 18px;margin-bottom:12px;text-align:center;color:white;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;margin-bottom:4px;">🦅 GARUDA — Hybrid AI + Rule-Based Autonomous Navigation</div>
+      <div style="font-size:12px;color:#94a3b8;line-height:1.6;">Combines <span style="color:var(--accent);font-weight:700;">scenario simulation, trajectory generation, path tracking, collision-avoidance logic, deep-learning-based perception, semantic road understanding, behavioural control, telemetry, performance evaluation</span>, and presentation-oriented visualization into one integrated MATLAB pipeline.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div style="background:linear-gradient(135deg,#1e3a5f,#0e7490);border-radius:10px;padding:13px;color:white;border:1px solid rgba(255,255,255,.1);">
+        <h3 style="font-size:13px;font-weight:800;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">⚡ Core Innovation: Why Hybrid AI + Rules?</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;font-size:10.5px;line-height:1.4;">
+            <strong style="color:#67e8f9;display:block;margin-bottom:2px;">🧠 Learned Models Provide</strong>Richer perception · Learned control behaviour · Visual understanding beyond geometry
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;font-size:10.5px;line-height:1.4;">
+            <strong style="color:#67e8f9;display:block;margin-bottom:2px;">🛡️ Deterministic Rules Provide</strong>Predictable constraints · Safety fallback · Explainable decisions for judges
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;font-size:10.5px;line-height:1.4;">
+            <strong style="color:#67e8f9;display:block;margin-bottom:2px;">🎯 Indian-Road Priority States</strong>Cruising · Yield/Slow · Lateral shift · Emergency brake · Cattle crossing
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;font-size:10.5px;line-height:1.4;">
+            <strong style="color:#67e8f9;display:block;margin-bottom:2px;">📊 Explainability (for Judges)</strong>Team can show exactly why vehicle slowed: object class + estimated distance + safety threshold
+          </div>
+        </div>
+      </div>
+      <div class="card teal" style="display:flex;flex-direction:column;gap:6px;">
+        <h4>🔄 Cattle Crossing State Machine (Scenario 5)</h4>
+        <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;">
+          <div style="background:var(--navy);color:white;border-radius:6px;padding:6px 10px;font-size:10px;font-weight:700;">APPROACH</div>
+          <div style="color:var(--accent);font-weight:900;font-size:14px;">→</div>
+          <div style="background:#d97706;color:white;border-radius:6px;padding:6px 10px;font-size:10px;font-weight:700;">CATTLE_DETECTED</div>
+          <div style="color:var(--accent);font-weight:900;font-size:14px;">→</div>
+          <div style="background:var(--red);color:white;border-radius:6px;padding:6px 10px;font-size:10px;font-weight:700;">STOPPED</div>
+          <div style="color:var(--accent);font-weight:900;font-size:14px;">→</div>
+          <div style="background:var(--purple);color:white;border-radius:6px;padding:6px 10px;font-size:10px;font-weight:700;">REPLANNING</div>
+          <div style="color:var(--accent);font-weight:900;font-size:14px;">→</div>
+          <div style="background:var(--green);color:white;border-radius:6px;padding:6px 10px;font-size:10px;font-weight:700;">RESUME ✅</div>
+        </div>
+        <div style="font-size:10.5px;color:#374151;line-height:1.5;margin-top:4px;">This sequence provides an intuitive closed loop connecting <strong>perception → decision → planning</strong> — the clearest demonstration of GARUDA's intelligence for judges.</div>
+        <div class="card green" style="margin-top:4px;">
+          <h4>✅ Scenario 5 Result (from Documentation)</h4>
+          <p>Speed: <strong>11.93 m/s</strong> · Min Clearance: <strong>13.81 m</strong> · Braking Events: <strong>0</strong> · Status: <span class="risk pass">PASS</span></p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom:8px;font-size:10px;font-weight:800;color:var(--gray);letter-spacing:1px;text-transform:uppercase;text-align:center;">END-TO-END PERCEPTION → DECISION → CONTROL PIPELINE</div>
+    <div class="pipe-strip">
+      <div class="ps c1"><div class="pn">1</div><div class="pi">📷</div><div class="pname">SENSOR FUSION</div><div class="pdesc">Camera + LIDAR + Radar · SyntheticCamera.m</div></div>
+      <div class="ps c2"><div class="pn">2</div><div class="pi">🧠</div><div class="pname">YOLO + DeepLab</div><div class="pdesc">8-class detection · Drivable mask · RunDeepLab.m</div></div>
+      <div class="ps c3"><div class="pn">3</div><div class="pi">⚠️</div><div class="pname">RISK ASSESSMENT</div><div class="pdesc">Object class + distance + safety threshold</div></div>
+      <div class="ps c4"><div class="pn">4</div><div class="pi">🧭</div><div class="pname">STATE MACHINE</div><div class="pdesc">Indian-road behaviour decision logic</div></div>
+      <div class="ps c5"><div class="pn">5</div><div class="pi">🗺️</div><div class="pname">PATH PLANNING</div><div class="pdesc">Adaptive spline · TestSafePathPlanner.m</div></div>
+      <div class="ps c6"><div class="pn">6</div><div class="pi">✅</div><div class="pname">SAFE NAVIGATION</div><div class="pdesc">MetricsLogger · 20Hz · ProbeChasePlot.m</div></div>
+    </div>
+  </div>
+  <div class="sf"><div class="sf-brand">🦅 GARUDA</div><div class="sf-tag">Perception + Intelligence + Safety — in one MATLAB stack</div><div class="sf-pg">3 / 12</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 4 — CORE FEATURES (7 modules)
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh"><div class="team-badge">DECEPTICON</div><div class="sh-title">CORE FEATURES</div><div class="sih-badge"><div class="sih-brain">🧠</div><div class="sih-txt">SMART INDIA<br>HACKATHON 2026</div></div></div>
+  <div class="sb" style="display:flex;flex-direction:column;height:calc(100% - 92px);">
+    <div style="text-align:center;margin-bottom:10px;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:var(--navy);">GARUDA — 7 Intelligence Modules</div>
+      <div style="font-size:11px;color:var(--gray);">Each module targets a specific failure mode of Western AV stacks on Indian roads</div>
+    </div>
+    <div class="feat-row" style="flex:1;">
+      <div class="fc fc1"><div class="fcn">1</div><div class="fci">🎯</div><div class="fcname">YOLO Object Detection</div><ul class="fcp"><li>Real-time detection of person, cow/cattle, auto-rickshaw, bicycle</li><li>Bounding-box visual perception</li><li>TrainYOLO.m + RunYOLO.m</li><li>Replaces simple distance-only logic</li><li>Confidence threshold tuned per class</li></ul></div>
+      <div class="fc fc2"><div class="fcn">2</div><div class="fci">🗺️</div><div class="fcname">DeepLabv3+ Segmentation</div><ul class="fcp"><li>Drivable-road pixel identification</li><li>Road boundary detection</li><li>TrainSegmentation.m</li><li>RunDeepLab.m inference</li><li>Especially for unmarked village & market roads</li></ul></div>
+      <div class="fc fc3"><div class="fcn">3</div><div class="fci">🧠</div><div class="fcname">CNN Behavioural Cloning</div><ul class="fcp"><li>Maps visual frames → steering + speed</li><li>ReLU-based architecture</li><li>3 conv blocks + max-pool + FC layers</li><li>RunCNNControl.m inference</li><li>Blended with deterministic planner</li></ul></div>
+      <div class="fc fc4"><div class="fcn">4</div><div class="fci">🛡️</div><div class="fcname">Deterministic Safety Layer</div><ul class="fcp"><li>Geometric collision-avoidance fallback</li><li>Active independent of DL confidence</li><li>Emergency braking override</li><li>CollisionAvoidance.m module</li><li>Explains decisions to judges clearly</li></ul></div>
+      <div class="fc fc5"><div class="fcn">5</div><div class="fci">🧭</div><div class="fcname">State Machine (Decision)</div><ul class="fcp"><li>Finite-state-machine for Indian roads</li><li>States: Cruise · Yield · Overtake · E-Brake · Cattle</li><li>PlannerBridge.m integration</li><li>Stateflow-inspired logic</li><li>Closed-loop perception→decision</li></ul></div>
+      <div class="fc fc6"><div class="fcn">6</div><div class="fci">📊</div><div class="fcname">Metrics & Visualisation</div><ul class="fcp"><li>MetricsLogger.m per-frame logging</li><li>LogStep + PrintSummary + PlotResults</li><li>ProbeChasePlot 3D chase view</li><li>Performance dashboard output</li><li>VideoWriter AVI recording</li></ul></div>
+      <div class="fc fc7"><div class="fcn">7</div><div class="fci">🗃️</div><div class="fcname">India Dataset Pipeline</div><ul class="fcp"><li>India Driving Dataset (IDD) integration</li><li>ParseIDDAnnotations.m polygon→bbox</li><li>DownloadGCSData.py acquisition</li><li>Synthetic data augmentation</li><li>Separate YOLO / DeepLab / CNN stages</li></ul></div>
+    </div>
+  </div>
+  <div class="sf"><div class="sf-brand">🦅 GARUDA</div><div class="sf-tag">7 modules · 1 mission — navigate India safely</div><div class="sf-pg">4 / 12</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 5 — SYSTEM ARCHITECTURE
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh"><div class="team-badge">DECEPTICON</div><div class="sh-title">SYSTEM ARCHITECTURE</div><div class="sih-badge"><div class="sih-brain">🧠</div><div class="sih-txt">SMART INDIA<br>HACKATHON 2026</div></div></div>
+  <div class="sb" style="display:flex;flex-direction:column;height:calc(100% - 92px);">
+    <div style="text-align:center;margin-bottom:10px;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:21px;font-weight:900;color:var(--navy);">GARUDA — High-Level System Architecture</div>
+      <div style="font-size:11px;color:var(--gray);">Goal: Explain how hybrid AI + deterministic safety enables real-time, India-specific autonomous navigation</div>
+    </div>
+    <div class="arch-body" style="flex:1;">
+      <div class="arch-lv">
+        <div class="al-lbl al1">LEVEL 1<br>SENSOR<br>LAYER</div>
+        <div class="al-content">
+          <div class="al-box"><div class="abi">📷</div><div class="abn">Camera</div><div class="abd">RGB frames · 30fps<br>SyntheticCamera.m</div></div>
+          <div class="al-arr">+</div>
+          <div class="al-box"><div class="abi">📡</div><div class="abn">LIDAR</div><div class="abd">3D point cloud<br>Obstacle depth</div></div>
+          <div class="al-arr">+</div>
+          <div class="al-box"><div class="abi">📻</div><div class="abn">Radar</div><div class="abd">Velocity detection<br>Adverse weather</div></div>
+          <div class="al-arr">→</div>
+          <div class="al-box" style="flex:1.5;background:#f0f9ff;border-color:#bae6fd;"><div class="abi">🔀</div><div class="abn">Sensor Fusion Module</div><div class="abd">Synchronised multi-modal input · Noise modelling · Calibration · SyntheticCamera.m</div></div>
+        </div>
+      </div>
+      <div class="arch-lv">
+        <div class="al-lbl al2">LEVEL 2<br>PERCEPTION<br>LAYER</div>
+        <div class="al-content">
+          <div class="al-box"><div class="abi">🎯</div><div class="abn">YOLO Detector</div><div class="abd">8 classes · person, cow, auto, bicycle · RunYOLO.m</div></div>
+          <div class="al-arr">+</div>
+          <div class="al-box"><div class="abi">🗺️</div><div class="abn">DeepLabv3+</div><div class="abd">Drivable mask · Road boundaries · RunDeepLab.m</div></div>
+          <div class="al-arr">+</div>
+          <div class="al-box"><div class="abi">🧠</div><div class="abn">CNN Cloning</div><div class="abd">Steer + speed prediction · RunCNNControl.m</div></div>
+          <div class="al-arr">→</div>
+          <div class="al-box" style="flex:1.4;background:#f0fdf4;border-color:#86efac;"><div class="abi">📋</div><div class="abn">Scene Understanding</div><div class="abd">Entity positions · classes · drivable space · predicted velocities</div></div>
+        </div>
+      </div>
+      <div class="arch-lv al3-dark" style="flex:1.4;">
+        <div class="al-lbl al3">LEVEL 3<br>CORE AI<br>DECIDE</div>
+        <div class="al-content">
+          <div class="al-box"><div class="abi">⚠️</div><div class="abn">Risk Assessment</div><div class="abd">Object class + distance + threshold</div></div>
+          <div class="al-arr">→</div>
+          <div class="al-box"><div class="abi">🧭</div><div class="abn">State Machine</div><div class="abd">Cruise · Yield · Overtake · E-Brake · Cattle</div></div>
+          <div class="al-arr">→</div>
+          <div class="al-core">
+            <div class="acn">⚡ ADAPTIVE PATH PLANNER · TestSafePathPlanner.m + PlannerBridge.m</div>
+            <div class="acs"><span>Free-space Nav</span><span>Waypoint-based</span><span>Spline paths</span><span>20Hz update</span><span>Collision-safe corridor</span></div>
+          </div>
+          <div class="al-arr">→</div>
+          <div class="al-box"><div class="abi">🏎️</div><div class="abn">Velocity Profiler</div><div class="abd">Speed per section · VelocityProfiler.m</div></div>
+        </div>
+      </div>
+      <div class="arch-lv">
+        <div class="al-lbl al4">LEVEL 4<br>SAFETY +<br>CONTROL</div>
+        <div class="al-content">
+          <div class="al-box" style="flex:1.5;background:#fef3c7;border-color:#fde68a;"><div class="abi">🛡️</div><div class="abn">Deterministic Safety Monitor (Always Active)</div><div class="abd">CollisionAvoidance.m · Overrides speed if hazard enters protected zone · Never disabled by DL errors</div></div>
+          <div class="al-arr">→</div>
+          <div class="al-box"><div class="abi">🚗</div><div class="abn">Vehicle Control</div><div class="abd">Throttle · Brake · Steer · Comfort bounds</div></div>
+          <div class="al-arr">→</div>
+          <div class="al-box" style="flex:1.5;background:#f0fdf4;border-color:#86efac;"><div class="abi">✅</div><div class="abn">Safe Navigation — Destination Reached</div><div class="abd">Continuous motion through India's most challenging traffic scenarios</div></div>
+        </div>
+      </div>
+      <div class="arch-lv">
+        <div class="al-lbl al5">LEVEL 5<br>SIMULATION<br>VALIDATE</div>
+        <div class="al-content">
+          <div class="al-box"><div class="abi">🎮</div><div class="abn">5 Scenarios<br>SetupML.m</div><div class="abd">SetupAllModels.m · One-click run</div></div>
+          <div class="al-arr">→</div>
+          <div class="al-box"><div class="abi">📊</div><div class="abn">ProbeChasePlot.m</div><div class="abd">3D chase + top-view live viz</div></div>
+          <div class="al-arr">→</div>
+          <div class="al-box"><div class="abi">📋</div><div class="abn">MetricsLogger.m</div><div class="abd">Completion · Clearance · Braking · Speed · Latency</div></div>
+          <div class="al-arr">→</div>
+          <div class="al-box"><div class="abi">🎬</div><div class="abn">VideoWriter AVI</div><div class="abd">Motion JPEG recording · Demo clips for SIH</div></div>
+          <div class="al-arr">→</div>
+          <div class="al-box"><div class="abi">🏅</div><div class="abn">5/5 PASS</div><div class="abd">0 collisions · 100% completion</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><div class="sf-brand">🦅 GARUDA</div><div class="sf-tag">5-layer intelligence stack — sensors to safe navigation</div><div class="sf-pg">5 / 12</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 6 — DEEP LEARNING PIPELINE (TECHNICAL APPROACH)
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh"><div class="team-badge">DECEPTICON</div><div class="sh-title">TECHNICAL APPROACH</div><div class="sih-badge"><div class="sih-brain">🧠</div><div class="sih-txt">SMART INDIA<br>HACKATHON 2026</div></div></div>
+  <div class="sb" style="height:calc(100% - 92px);">
+    <div class="tech-grid">
+      <div class="ml-panel">
+        <h3>🧠 THREE-MODEL DL PIPELINE</h3>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div class="ml-box mlb1" style="display:flex;gap:8px;align-items:center;text-align:left;">
+            <span style="font-size:20px;">🎯</span>
+            <div><div class="mn">Model A: YOLO Object Detection</div><div class="ms">Person · Cow/Cattle · Auto-rickshaw · Bicycle · Traffic-related objects · Replaces distance-only perception · TrainYOLO.m</div></div>
+          </div>
+          <div class="flow-arr">↓</div>
+          <div class="ml-box mlb2" style="display:flex;gap:8px;align-items:center;text-align:left;">
+            <span style="font-size:20px;">🗺️</span>
+            <div><div class="mn">Model B: DeepLabv3+ Semantic Segmentation</div><div class="ms">Drivable-road pixels · Road boundaries · Unmarked village & market roads · TrainSegmentation.m + RunDeepLab.m</div></div>
+          </div>
+          <div class="flow-arr">↓</div>
+          <div class="ml-box mlb3" style="display:flex;gap:8px;align-items:center;text-align:left;">
+            <span style="font-size:20px;">🧠</span>
+            <div><div class="mn">Model C: CNN Behavioural Cloning (ReLU)</div><div class="ms">Visual frames → continuous steering + speed · 3 conv blocks + ReLU + max-pool + FC + dropout · RunCNNControl.m</div></div>
+          </div>
+          <div class="flow-arr">↓</div>
+          <div class="ml-box" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:8px;">
+            <div class="mn">🔗 CNN Architecture Detail (ReLU)</div>
+            <div class="ms">f(x) = max(0,x) · After each conv block and hidden FC layer · Non-linearity without saturation · Active gradient for positive inputs · 2-value regression output: steering angle + speed</div>
+          </div>
+          <div class="flow-arr">↓</div>
+          <div class="fusion"><div class="ft">⚡ RISK LAYER: Object class + estimated distance + safety threshold</div><div class="fs">Strict threshold (CNN) · Conservative (color fallback) · Lower (YOLO reliable zones)</div></div>
+          <div class="flow-arr">↓</div>
+          <div class="output"><div class="ot">✅ Deterministic Safety Override — Always Active</div><div class="os">DL is enhancement · Safety fallback is guaranteed · 5/5 scenarios passed</div></div>
+        </div>
+      </div>
+      <div class="sc-panel">
+        <h3>🎮 VALIDATION SCENARIOS</h3>
+        <p style="font-size:10.5px;color:var(--gray);margin-bottom:6px;">5 India-specific controlled experiments exposing different weaknesses of conventional lane-centric planning</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+          <div class="sc-card">
+            <div class="sc-hdr"><div class="sc-ico">🛤️</div><div class="sc-nm">S1 — Village Road</div></div>
+            <div class="sc-tag">Scenario1_VillageRoad.m</div>
+            <div class="sc-pts">Narrow, winding, unmarked road<br>Sudden pedestrian crossing hazard<br>Free-space navigation (no lane lines)<br><strong>Speed: 6.00 m/s · Clear: 11.90 m</strong><br><span class="risk pass">PASS — 1 braking event</span></div>
+          </div>
+          <div class="sc-card">
+            <div class="sc-hdr"><div class="sc-ico">🏙️</div><div class="sc-nm">S2 — Urban Intersection</div></div>
+            <div class="sc-tag">Scenario2_UrbanIntersection.m</div>
+            <div class="sc-pts">Signal-free 4-way intersection<br>Autos · bicycles · buses · mixed traffic<br>Yield, creep, conflict-aware nav<br><strong>Speed: 6.55 m/s · Clear: 4.08 m</strong><br><span class="risk high">14 braking events</span> · <span class="risk pass">PASS</span></div>
+          </div>
+          <div class="sc-card">
+            <div class="sc-hdr"><div class="sc-ico">🛣️</div><div class="sc-nm">S3 — Highway Merge</div></div>
+            <div class="sc-tag">Scenario3_HighwayMerge.m</div>
+            <div class="sc-pts">High-speed with slow heavy vehicles<br>Safe merging and overtaking<br>Vehicle motion constraint respect<br><strong>Speed: 18.01 m/s (~71 km/h)</strong><br>Min clearance: 11.29 m · <span class="risk pass">PASS</span></div>
+          </div>
+          <div class="sc-card">
+            <div class="sc-hdr"><div class="sc-ico">🏪</div><div class="sc-nm">S4 — Market Area</div></div>
+            <div class="sc-tag">Scenario4_MarketArea.m</div>
+            <div class="sc-pts">Dense market congestion · Pushcarts<br>Stop-and-go navigation<br>YOLO threshold tuning needed<br><strong>Speed: 3.14 m/s · Clear: 4.02 m</strong><br><span class="risk high">11 braking events</span> · <span class="risk pass">PASS</span></div>
+          </div>
+        </div>
+        <div class="sc-card" style="border-left:3px solid var(--green);">
+          <div class="sc-hdr"><div class="sc-ico">🐄</div><div class="sc-nm">S5 — Cattle Crossing · Scenario5_CattleCrossing.m · Best Result</div></div>
+          <div class="sc-pts">Sudden cattle crossing event · Full state-machine: APPROACH → DETECTED → STOP → REPLAN → RESUME<br><strong>Speed: 11.93 m/s · Min clearance: 13.81 m · Braking events: 0 · Status: <span class="risk pass">PASS</span></strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><div class="sf-brand">🦅 GARUDA</div><div class="sf-tag">3 DL models + deterministic safety · proven across 5 India scenarios</div><div class="sf-pg">6 / 12</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 7 — DATASET & DATA PIPELINE
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh"><div class="team-badge">DECEPTICON</div><div class="sh-title">DATASETS & DATA PIPELINE</div><div class="sih-badge"><div class="sih-brain">🧠</div><div class="sih-txt">SMART INDIA<br>HACKATHON 2026</div></div></div>
+  <div class="sb" style="height:calc(100% - 92px);">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;height:100%;">
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div class="section-lbl">📦 Data Sources (from Documentation)</div>
+        <div style="display:flex;gap:10px;align-items:flex-start;background:white;border-radius:8px;padding:10px 12px;border:1px solid #e5e7eb;box-shadow:0 1px 4px rgba(0,0,0,.04);">
+          <div style="width:36px;height:36px;border-radius:8px;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🗺️</div>
+          <div><div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:2px;">India Driving Dataset (IDD)</div><div style="font-size:10.5px;color:var(--gray);line-height:1.4;">Main real-world visual-data source. JSON annotations with polygon-style bounding boxes. Labels mapped to: <strong>person, cow, auto-rickshaw, bicycle.</strong> ParseIDDAnnotations.m converts polygon→bbox automatically.</div><span style="display:inline-block;background:var(--navy);color:white;border-radius:3px;padding:1px 6px;font-size:8.5px;font-weight:700;margin-top:3px;">PRIMARY TRAINING DATA</span></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;background:white;border-radius:8px;padding:10px 12px;border:1px solid #e5e7eb;box-shadow:0 1px 4px rgba(0,0,0,.04);">
+          <div style="width:36px;height:36px;border-radius:8px;background:#d1fae5;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📷</div>
+          <div><div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:2px;">Synthetic Camera Data</div><div style="font-size:10.5px;color:var(--gray);line-height:1.4;">Generated by SyntheticCamera.m — simulates Camera + LIDAR + Radar fusion with Indian road noise models. Supplements real data where network-limited GCS transfers were incomplete. Day/night/rain augmentation.</div><span style="display:inline-block;background:var(--teal);color:white;border-radius:3px;padding:1px 6px;font-size:8.5px;font-weight:700;margin-top:3px;">SIMULATION + AUGMENTATION</span></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;background:white;border-radius:8px;padding:10px 12px;border:1px solid #e5e7eb;box-shadow:0 1px 4px rgba(0,0,0,.04);">
+          <div style="width:36px;height:36px;border-radius:8px;background:#fef3c7;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚦</div>
+          <div><div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:2px;">Traffic-Light Structured Dataset</div><div style="font-size:10.5px;color:var(--gray);line-height:1.4;">Additional traffic-light and structured datasets available in project. Used for urban intersection scenario training and detection confidence calibration.</div><span style="display:inline-block;background:#d97706;color:white;border-radius:3px;padding:1px 6px;font-size:8.5px;font-weight:700;margin-top:3px;">SUPPLEMENTARY DATA</span></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;background:white;border-radius:8px;padding:10px 12px;border:1px solid #e5e7eb;box-shadow:0 1px 4px rgba(0,0,0,.04);">
+          <div style="width:36px;height:36px;border-radius:8px;background:#ede9fe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">☁️</div>
+          <div><div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:2px;">GCS Cloud Storage</div><div style="font-size:10.5px;color:var(--gray);line-height:1.4;">DownloadGCSData.py handles data acquisition from Google Cloud Storage. Some data transferred partially due to network limitations — synthetic samples fill gaps in the pipeline for stability.</div><span style="display:inline-block;background:var(--purple);color:white;border-radius:3px;padding:1px 6px;font-size:8.5px;font-weight:700;margin-top:3px;">CLOUD ACQUISITION</span></div>
+        </div>
+      </div>
+      <div style="background:var(--navy);border-radius:10px;padding:14px;color:white;display:flex;flex-direction:column;gap:5px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:900;color:var(--accent);margin-bottom:6px;">🔄 DATA PROCESSING PIPELINE</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(255,255,255,.06);border-radius:6px;"><div style="width:18px;height:18px;border-radius:50%;background:var(--accent);color:#1a1a1a;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div><div><div style="font-size:10.5px;font-weight:800;color:white;">Data Acquisition</div><div style="font-size:9px;color:#94a3b8;">IDD frames · DownloadGCSData.py · Synthetic generation · Traffic-light dataset</div></div></div>
+        <div style="text-align:center;color:#475569;font-size:11px;">↓</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(255,255,255,.06);border-radius:6px;"><div style="width:18px;height:18px;border-radius:50%;background:var(--accent);color:#1a1a1a;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div><div><div style="font-size:10.5px;font-weight:800;color:white;">IDD Annotation Parsing</div><div style="font-size:9px;color:#94a3b8;">ParseIDDAnnotations.m · Polygon→bounding box · Map to project classes</div></div></div>
+        <div style="text-align:center;color:#475569;font-size:11px;">↓</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(255,255,255,.06);border-radius:6px;"><div style="width:18px;height:18px;border-radius:50%;background:var(--accent);color:#1a1a1a;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div><div><div style="font-size:10.5px;font-weight:800;color:white;">Train/Val/Test Split</div><div style="font-size:9px;color:#94a3b8;">Separate splits per model · YOLO · DeepLab · CNN Cloning · Evaluation stage</div></div></div>
+        <div style="text-align:center;color:#475569;font-size:11px;">↓</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(255,255,255,.06);border-radius:6px;"><div style="width:18px;height:18px;border-radius:50%;background:var(--accent);color:#1a1a1a;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div><div><div style="font-size:10.5px;font-weight:800;color:white;">Model Training (MATLAB DL Toolbox)</div><div style="font-size:9px;color:#94a3b8;">TrainYOLO.m · TrainSegmentation.m · CNN cloning · ReLU architecture</div></div></div>
+        <div style="text-align:center;color:#475569;font-size:11px;">↓</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(255,255,255,.06);border-radius:6px;"><div style="width:18px;height:18px;border-radius:50%;background:var(--accent);color:#1a1a1a;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</div><div><div style="font-size:10.5px;font-weight:800;color:white;">Evaluation (mAP · IoU · MAE)</div><div style="font-size:9px;color:#94a3b8;">YOLO: mAP/precision/recall · DeepLab: IoU/Dice · CNN: steering/speed MAE</div></div></div>
+        <div style="text-align:center;color:#475569;font-size:11px;">↓</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(255,255,255,.06);border-radius:6px;"><div style="width:18px;height:18px;border-radius:50%;background:var(--accent);color:#1a1a1a;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">6</div><div><div style="font-size:10.5px;font-weight:800;color:white;">False-Positive Threshold Tuning</div><div style="font-size:9px;color:#94a3b8;">Strict threshold (CNN) · Conservative (color fallback) · Lower (YOLO reliable zones) · Prevents market scenario speed-capping</div></div></div>
+        <div style="text-align:center;color:#475569;font-size:11px;">↓</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(39,158,94,.18);border-radius:6px;border:1px solid rgba(39,158,94,.4);"><div style="width:18px;height:18px;border-radius:50%;background:var(--green);color:white;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">✓</div><div><div style="font-size:10.5px;font-weight:800;color:#4ade80;">Integrated Inference in All 5 Scenarios</div><div style="font-size:9px;color:#94a3b8;">RunYOLO + RunDeepLab + RunCNNControl · Safety fallback always active · 5/5 PASS</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><div class="sf-brand">🦅 GARUDA</div><div class="sf-tag">India-native data · India-native intelligence</div><div class="sf-pg">7 / 12</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 8 — PERFORMANCE RESULTS (REAL DATA FROM PDF)
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh"><div class="team-badge">DECEPTICON</div><div class="sh-title">PERFORMANCE RESULTS</div><div class="sih-badge"><div class="sih-brain">🧠</div><div class="sih-txt">SMART INDIA<br>HACKATHON 2026</div></div></div>
+  <div class="sb" style="height:calc(100% - 92px);">
+    <!-- KPI row -->
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px;">
+      <div style="background:var(--navy);border-radius:10px;padding:12px;text-align:center;color:white;border-top:3px solid var(--accent);">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;color:var(--accent);line-height:1;">5/5</div>
+        <div style="font-size:10px;color:#94a3b8;margin-top:3px;">Scenarios Passed</div>
+      </div>
+      <div style="background:var(--navy);border-radius:10px;padding:12px;text-align:center;color:white;border-top:3px solid #4ade80;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;color:#4ade80;line-height:1;">0%</div>
+        <div style="font-size:10px;color:#94a3b8;margin-top:3px;">Collision Rate</div>
+      </div>
+      <div style="background:var(--navy);border-radius:10px;padding:12px;text-align:center;color:white;border-top:3px solid #67e8f9;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;color:#67e8f9;line-height:1;">20<span style="font-size:20px;">Hz</span></div>
+        <div style="font-size:10px;color:#94a3b8;margin-top:3px;">Frame Processing Rate</div>
+      </div>
+      <div style="background:var(--navy);border-radius:10px;padding:12px;text-align:center;color:white;border-top:3px solid #c4b5fd;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;color:#c4b5fd;line-height:1;">0.05<span style="font-size:18px;">s</span></div>
+        <div style="font-size:10px;color:#94a3b8;margin-top:3px;">Avg Processing Latency</div>
+      </div>
+      <div style="background:var(--navy);border-radius:10px;padding:12px;text-align:center;color:white;border-top:3px solid #fca5a5;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;color:#fca5a5;line-height:1;">100%</div>
+        <div style="font-size:10px;color:#94a3b8;margin-top:3px;">Completion Rate</div>
+      </div>
+    </div>
+    <!-- Scenario results table -->
+    <div class="section-lbl" style="margin-bottom:6px;">📊 Reported Scenario Results (from Project Documentation — to be revalidated from frozen code)</div>
+    <div class="srt">
+      <div class="srt-head">
+        <div>Scenario</div><div>Avg Speed</div><div>Min Clearance</div><div>Braking Events</div><div>Processing</div><div>Status</div>
+      </div>
+      <div class="srt-row">
+        <div class="ct-metric">🛤️ S1 — Village Road (Unmarked, Winding)</div>
+        <div>6.00 m/s</div><div style="color:var(--green);font-weight:700;">11.90 m ✓</div><div>1</div><div>20 Hz</div><div><span class="risk pass">PASS</span></div>
+      </div>
+      <div class="srt-row">
+        <div class="ct-metric">🏙️ S2 — Urban Intersection (Mixed Traffic)</div>
+        <div>6.55 m/s</div><div style="color:var(--accent);font-weight:700;">4.08 m ⚠</div><div style="color:var(--accent);font-weight:700;">14</div><div>20 Hz</div><div><span class="risk pass">PASS</span></div>
+      </div>
+      <div class="srt-row">
+        <div class="ct-metric">🛣️ S3 — Highway Merge (~71 km/h)</div>
+        <div style="color:var(--green);font-weight:700;">18.01 m/s</div><div style="color:var(--green);font-weight:700;">11.29 m ✓</div><div>1</div><div>20 Hz</div><div><span class="risk pass">PASS</span></div>
+      </div>
+      <div class="srt-row">
+        <div class="ct-metric">🏪 S4 — Market Area (Dense Congestion)</div>
+        <div>3.14 m/s</div><div style="color:var(--accent);font-weight:700;">4.02 m ⚠</div><div style="color:var(--red);font-weight:700;">11</div><div>20 Hz</div><div><span class="risk pass">PASS</span></div>
+      </div>
+      <div class="srt-row" style="background:#f0fdf4;">
+        <div class="ct-metric">🐄 S5 — Cattle Crossing (Best Result)</div>
+        <div>11.93 m/s</div><div style="color:var(--green);font-weight:700;">13.81 m ✓✓</div><div style="color:var(--green);font-weight:700;">0 ✓</div><div>20 Hz</div><div><span class="risk pass">PASS ⭐</span></div>
+      </div>
+    </div>
+    <!-- Bottom metrics -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+      <div class="bar-panel">
+        <h4>📈 Minimum Clearance per Scenario (m)</h4>
+        <div class="bi"><div class="bi-hdr"><span>S5 Cattle Crossing</span><span>13.81 m</span></div><div class="bt"><div class="bf" style="width:92%;background:#1d9e5e;"></div></div></div>
+        <div class="bi"><div class="bi-hdr"><span>S1 Village Road</span><span>11.90 m</span></div><div class="bt"><div class="bf" style="width:79%;background:#1e40af;"></div></div></div>
+        <div class="bi"><div class="bi-hdr"><span>S3 Highway Merge</span><span>11.29 m</span></div><div class="bt"><div class="bf" style="width:75%;background:#0e7490;"></div></div></div>
+        <div class="bi"><div class="bi-hdr"><span>S2 Urban Intersection</span><span>4.08 m</span></div><div class="bt"><div class="bf" style="width:27%;background:#d97706;"></div></div></div>
+        <div class="bi"><div class="bi-hdr"><span>S4 Market Area</span><span>4.02 m</span></div><div class="bt"><div class="bf" style="width:26%;background:#b91c1c;"></div></div></div>
+      </div>
+      <div class="card green" style="padding:12px;">
+        <h4>🎯 System Summary vs. Conventional Planners</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;">
+          <div style="background:rgba(214,48,49,.08);border-radius:6px;padding:8px;text-align:center;border:1px solid rgba(214,48,49,.2);">
+            <div style="font-size:10px;font-weight:700;color:var(--red);margin-bottom:2px;">Conventional Planner</div>
+            <div style="font-size:10px;color:#374151;line-height:1.5;">Lane-centric · Deadlock on cattle · No animal class · Stop-and-replan · Per-frame resets</div>
+          </div>
+          <div style="background:rgba(29,158,94,.08);border-radius:6px;padding:8px;text-align:center;border:1px solid rgba(29,158,94,.2);">
+            <div style="font-size:10px;font-weight:700;color:var(--green);margin-bottom:2px;">GARUDA</div>
+            <div style="font-size:10px;color:#374151;line-height:1.5;">Free-space nav · Cattle state machine · 8 hazard classes · Adaptive replanning · 5/5 ✅</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><div class="sf-brand">🦅 GARUDA</div><div class="sf-tag">5/5 scenarios · 0 collisions · 100% completion · 20Hz real-time</div><div class="sf-pg">8 / 12</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 9 — WHY GARUDA WINS
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh"><div class="team-badge">DECEPTICON</div><div class="sh-title">WHY GARUDA WINS</div><div class="sih-badge"><div class="sih-brain">🧠</div><div class="sih-txt">SMART INDIA<br>HACKATHON 2026</div></div></div>
+  <div class="sb" style="height:calc(100% - 92px);">
+    <div class="why-grid">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="diff-card"><div class="di-wrap di1">🇮🇳</div><div><div class="di-title">India-First Design — Not a Western AV Port</div><div class="di-body">Built from scratch for Indian traffic. Every hazard class (cattle, auto, pushcart), every threshold, every scenario reflects real Indian road behaviour — not adapted Western assumptions.</div><span class="di-tag">DESIGNED FOR BHARAT</span></div></div>
+        <div class="diff-card"><div class="di-wrap di2">🛡️</div><div><div class="di-title">Hybrid AI + Deterministic Safety</div><div class="di-body">The safety fallback (CollisionAvoidance.m) is always active and can override DL decisions. A perception confidence error cannot remove emergency braking — critical for SIH safety standards.</div><span class="di-tag">SAFETY-CRITICAL ARCHITECTURE</span></div></div>
+        <div class="diff-card"><div class="di-wrap di3">💡</div><div><div class="di-title">Explainability — Judges Can See Why</div><div class="di-body">Team can show exactly why the vehicle slowed: "YOLO detected cow class at 4.0m → safety threshold triggered → speed reduced." Not a black-box end-to-end neural network decision.</div><span class="di-tag">TRANSPARENT AI</span></div></div>
+        <div class="diff-card"><div class="di-wrap di4">📊</div><div><div class="di-title">Measurable Objective Results</div><div class="di-body">Documented: 5/5 scenarios passed · 100% completion · 0% collisions · 20Hz · minimum clearance data per scenario · braking event counts · latency. All verifiable from MetricsLogger.m logs.</div><span class="di-tag">EVIDENCE-BASED DEMO</span></div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="diff-card"><div class="di-wrap di5">🎮</div><div><div class="di-title">One-Click Full Demo (SetupAllModels.m)</div><div class="di-body">SetupAllModels.m + SetupML.m provide one-click model initialisation. The five-scenario master runner executes all environments and displays a performance dashboard with recorded AVI clips.</div><span class="di-tag">JUDGE-READY DEMO</span></div></div>
+        <div class="diff-card"><div class="di-wrap di6">🔬</div><div><div class="di-title">Three Independent DL Models</div><div class="di-body">YOLO for detection · DeepLabv3+ for segmentation · CNN with ReLU for behavioral cloning. Each with separate training pipeline, evaluation metric, and integration point — not a single monolithic model.</div><span class="di-tag">MODULAR DL STACK</span></div></div>
+        <div class="mkt-box" style="flex:1;">
+          <h3>🎯 Impact & Deployment Vision</h3>
+          <div class="mkt-stats">
+            <div class="ms-item"><div class="msv">1.5L</div><div class="msl">Road deaths/yr India</div></div>
+            <div class="ms-item"><div class="msv">70%</div><div class="msl">NH through unstructured roads</div></div>
+            <div class="ms-item"><div class="msv">$8B</div><div class="msl">India AV market by 2030</div></div>
+            <div class="ms-item"><div class="msv">∞</div><div class="msl">No new infra required</div></div>
+          </div>
+          <div class="uc-list">
+            <div class="uc-item"><span class="uc-chk">✦</span>Autonomous trucks on NH-44, NH-48</div>
+            <div class="uc-item"><span class="uc-chk">✦</span>Last-mile delivery in tier-2/3 cities</div>
+            <div class="uc-item"><span class="uc-chk">✦</span>ADAS safety layer for passenger vehicles</div>
+            <div class="uc-item"><span class="uc-chk">✦</span>Defence autonomous convoy navigation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><div class="sf-brand">🦅 GARUDA</div><div class="sf-tag">India-first · Hybrid AI · Explainable · Proven · Demo-ready</div><div class="sf-pg">9 / 12</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 10 — JUDGE Q&A (from actual documentation)
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh"><div class="team-badge">DECEPTICON</div><div class="sh-title">JUDGE Q&A PREPARATION</div><div class="sih-badge"><div class="sih-brain">🧠</div><div class="sih-txt">SMART INDIA<br>HACKATHON 2026</div></div></div>
+  <div class="sb" style="height:calc(100% - 92px);">
+    <div style="text-align:center;margin-bottom:12px;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;color:var(--navy);">Anticipated Judge Questions — Prepared Answers (from Project Documentation)</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div style="background:white;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="background:#1e40af;padding:7px 12px;font-size:10.5px;font-weight:800;color:white;">Q: Why MATLAB instead of Python / CARLA / ROS?</div>
+          <div style="padding:10px 12px;font-size:10.5px;color:#374151;line-height:1.55;">MATLAB provides an <strong>integrated environment for scenario generation, vehicle modeling, control, visualization, and deep-learning experimentation.</strong> This reduced integration overhead and allowed rapid testing of five targeted Indian-road cases without managing separate ROS/Python/simulation tool chains.</div>
+        </div>
+        <div style="background:white;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="background:#0e7490;padding:7px 12px;font-size:10.5px;font-weight:800;color:white;">Q: How do you handle roads without lane markings?</div>
+          <div style="padding:10px 12px;font-size:10.5px;color:#374151;line-height:1.55;">The system <strong>does not depend exclusively on lane lines.</strong> It uses <strong>free-space / waypoint-based navigation</strong> combined with DeepLabv3+ semantic road segmentation to estimate drivable regions and road boundaries — making it inherently suitable for unmarked village and dense-market roads.</div>
+        </div>
+        <div style="background:white;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="background:var(--purple);padding:7px 12px;font-size:10.5px;font-weight:800;color:white;">Q: What if YOLO misses a pedestrian or cattle?</div>
+          <div style="padding:10px 12px;font-size:10.5px;color:#374151;line-height:1.55;">A <strong>deterministic safety layer (CollisionAvoidance.m) remains active at all times.</strong> The design uses learned perception as an enhancement while retaining a geometric safety fallback capable of commanding braking when a hazard enters the protected region — regardless of DL confidence.</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div style="background:white;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="background:#d97706;padding:7px 12px;font-size:10.5px;font-weight:800;color:white;">Q: Why is ReLU used in the CNN?</div>
+          <div style="padding:10px 12px;font-size:10.5px;color:#374151;line-height:1.55;">ReLU: <strong>f(x) = max(0,x)</strong>. Introduces non-linearity while remaining computationally simple. Supports effective gradient flow for positive activations. Well-suited to the <strong>convolutional feature-extraction pipeline</strong> for visual steering/speed regression. Used after each conv block and hidden FC layer.</div>
+        </div>
+        <div style="background:white;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="background:#065f46;padding:7px 12px;font-size:10.5px;font-weight:800;color:white;">Q: How do you prove the system works?</div>
+          <div style="padding:10px 12px;font-size:10.5px;color:#374151;line-height:1.55;">The master scenario runner executes all five environments and records <strong>objective metrics: completion rate, minimum clearance, braking events, speed, and latency.</strong> Visual logs and a performance dashboard provide additional evidence. All metrics traceable to MetricsLogger.m logs.</div>
+        </div>
+        <div style="background:white;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.05);">
+          <div style="background:#b91c1c;padding:7px 12px;font-size:10.5px;font-weight:800;color:white;">Q: Are the models actually trained?</div>
+          <div style="padding:10px 12px;font-size:10.5px;color:#374151;line-height:1.55;"><strong>Answer precisely from latest training logs:</strong> Identify dataset version, number of training/validation samples, model version, training completion status, and held-out evaluation metrics (mAP for YOLO, IoU/Dice for DeepLab, MAE for CNN). Do not describe a planned model as fully trained unless final artifact confirms it.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><div class="sf-brand">🦅 GARUDA</div><div class="sf-tag">Every answer backed by actual system architecture and documented results</div><div class="sf-pg">10 / 12</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 11 — ROADMAP
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh"><div class="team-badge">DECEPTICON</div><div class="sh-title">IMPLEMENTATION ROADMAP</div><div class="sih-badge"><div class="sih-brain">🧠</div><div class="sih-txt">SMART INDIA<br>HACKATHON 2026</div></div></div>
+  <div class="sb" style="height:calc(100% - 92px);">
+    <div style="text-align:center;margin-bottom:12px;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:21px;font-weight:900;color:var(--navy);">GARUDA — 4-Phase Deployment Roadmap</div>
+      <div style="font-size:11.5px;color:var(--gray);">From MATLAB simulation prototype to real-world national deployment</div>
+    </div>
+    <div class="rm-row">
+      <div class="ph-lbl ph1"><div class="pht">Phase 1 — NOW</div><div class="phn">MATLAB Prototype</div><span class="phd">SIH 2026</span></div>
+      <div class="ph-content">
+        <div class="ph-item"><div class="ph-chk" style="background:#dbeafe;color:#1e40af;">✓</div><div class="ph-txt"><strong>5-Scenario Framework</strong>All scenarios implemented and validated · SetupAllModels.m one-click runner</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#dbeafe;color:#1e40af;">✓</div><div class="ph-txt"><strong>3 DL Models Integrated</strong>YOLO + DeepLabv3+ + CNN ReLU · TrainYOLO/TrainSegmentation/CNN pipelines</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#dbeafe;color:#1e40af;">✓</div><div class="ph-txt"><strong>Safety Architecture</strong>CollisionAvoidance.m always-active fallback · Deterministic override</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#dbeafe;color:#1e40af;">✓</div><div class="ph-txt"><strong>Full Metrics Suite</strong>MetricsLogger · ProbeChasePlot · VideoWriter AVI demo recording</div></div>
+      </div>
+    </div>
+    <div class="rm-row">
+      <div class="ph-lbl ph2"><div class="pht">Phase 2 — 6 Months</div><div class="phn">Hardware-in-Loop</div><span class="phd">Post-SIH</span></div>
+      <div class="ph-content">
+        <div class="ph-item"><div class="ph-chk" style="background:#cffafe;color:#0e7490;">→</div><div class="ph-txt"><strong>Real Camera + LIDAR</strong>Port MATLAB pipeline to ROS2 on embedded GPU (NVIDIA Jetson AGX Orin)</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#cffafe;color:#0e7490;">→</div><div class="ph-txt"><strong>Live Testing</strong>Velodyne LiDAR on test vehicle · Controlled campus closed-road validation</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#cffafe;color:#0e7490;">→</div><div class="ph-txt"><strong>Dataset Expansion</strong>Collect 50,000+ real IDD frames · Retrain YOLO + DeepLab on expanded set</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#cffafe;color:#0e7490;">→</div><div class="ph-txt"><strong>Target: &lt;20ms</strong>End-to-end latency on embedded hardware · TensorRT optimisation</div></div>
+      </div>
+    </div>
+    <div class="rm-row">
+      <div class="ph-lbl ph3"><div class="pht">Phase 3 — 18 Months</div><div class="phn">Pilot Deployment</div><span class="phd">1.5 Years</span></div>
+      <div class="ph-content">
+        <div class="ph-item"><div class="ph-chk" style="background:#ede9fe;color:var(--purple);">→</div><div class="ph-txt"><strong>NHAI Closed-Road Pilot</strong>10 km NH stretch · AIS 189 autonomous vehicle safety certification</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#ede9fe;color:var(--purple);">→</div><div class="ph-txt"><strong>Fleet Integration</strong>ADAS layer for 3 logistics vehicles · 10,000 km real-world validation</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#ede9fe;color:var(--purple);">→</div><div class="ph-txt"><strong>Extended Scenario Suite</strong>Add flood-prone roads, construction zones, rural NH at night</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#ede9fe;color:var(--purple);">→</div><div class="ph-txt"><strong>Model Quantisation</strong>INT8/FP16 TensorRT for vehicle ECU · SoC-grade deployment</div></div>
+      </div>
+    </div>
+    <div class="rm-row" style="margin-bottom:0;">
+      <div class="ph-lbl ph4"><div class="pht">Phase 4 — 3 Years</div><div class="phn">National Scale</div><span class="phd">3 Years</span></div>
+      <div class="ph-content">
+        <div class="ph-item"><div class="ph-chk" style="background:#d1fae5;color:#065f46;">→</div><div class="ph-txt"><strong>OEM Partnership</strong>License GARUDA stack to Indian OEMs (Tata, Mahindra) as ADAS module</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#d1fae5;color:#065f46;">→</div><div class="ph-txt"><strong>Smart City MoU</strong>Deploy on 10 Smart City routes · Integrate with city traffic management systems</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#d1fae5;color:#065f46;">→</div><div class="ph-txt"><strong>Defence &amp; Strategic</strong>Autonomous convoy navigation for border logistics · MoD partnership</div></div>
+        <div class="ph-item"><div class="ph-chk" style="background:#d1fae5;color:#065f46;">→</div><div class="ph-txt"><strong>IP &amp; Patent</strong>File patents on hybrid safety architecture + India-class annotated dataset</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><div class="sf-brand">🦅 GARUDA</div><div class="sf-tag">From SIH demo to national highways — a clear path forward</div><div class="sf-pg">11 / 12</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SLIDE 12 — CLOSING
+══════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh"><div class="team-badge">DECEPTICON</div><div class="sh-title">CONCLUSION</div><div class="sih-badge"><div class="sih-brain">🧠</div><div class="sih-txt">SMART INDIA<br>HACKATHON 2026</div></div></div>
+  <div class="close-body">
+    <div class="close-left">
+      <div style="font-size:56px;margin-bottom:14px;">🦅</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:50px;font-weight:900;color:white;line-height:.9;margin-bottom:8px;">G<span style="color:var(--accent);">ARUDA</span></div>
+      <div style="font-size:13px;color:#94a3b8;margin-bottom:18px;font-style:italic;">AI-Powered Adaptive Path Planning &amp; Collision Avoidance<br>for Autonomous Vehicles on Unstructured Indian Roads</div>
+      <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:14px;margin-bottom:18px;">
+        <div style="font-size:15px;font-weight:700;color:white;line-height:1.8;">"India's roads are not broken.<br>Western AV stacks are simply<br>not built for them."</div>
+        <div style="font-size:11px;color:#475569;margin-top:5px;">— GARUDA Design Principle</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#e2e8f0;"><span style="color:var(--accent);font-size:14px;">✦</span>3 deep learning models — YOLO + DeepLabv3+ + CNN ReLU</div>
+        <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#e2e8f0;"><span style="color:var(--accent);font-size:14px;">✦</span>Deterministic safety fallback — always active, never overridden by DL</div>
+        <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#e2e8f0;"><span style="color:var(--accent);font-size:14px;">✦</span>5/5 scenarios passed · 0 collisions · 100% completion</div>
+        <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#e2e8f0;"><span style="color:var(--accent);font-size:14px;">✦</span>20Hz real-time processing · 0.05s latency</div>
+        <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#e2e8f0;"><span style="color:var(--accent);font-size:14px;">✦</span>Explainable: judges see exactly why vehicle acted</div>
+      </div>
+    </div>
+    <div class="close-right">
+      <div style="font-weight:900;font-size:14px;color:var(--navy);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">📋 Summary</div>
+      <div class="card red"><h4>Problem Solved</h4><p>Western AV planning fails on Indian unstructured roads — solved by hybrid AI + deterministic safety with India-specific hazard classes and state-machine decision logic.</p></div>
+      <div class="card teal"><h4>Technical Innovation</h4><p>3 DL models (YOLO + DeepLabv3+ + CNN ReLU) + deterministic safety fallback + cattle-crossing state machine + free-space navigation — all in one integrated MATLAB stack.</p></div>
+      <div class="card gold"><h4>Proven Performance</h4><p>5/5 scenarios PASS · 0 collisions · 100% completion · 20Hz · clearances ranging 4.02–13.81m · from village road to cattle crossing.</p></div>
+      <div class="card green"><h4>Scalable Vision</h4><p>4-phase roadmap: MATLAB prototype → Hardware-in-loop → NHAI pilot → OEM + Smart City national deployment. No new infrastructure required.</p></div>
+      <div style="background:var(--navy);border-radius:10px;padding:14px;text-align:center;color:white;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;color:var(--accent);">🦅 GARUDA · Team DeceptiCon · SIH 2026</div>
+        <div style="font-size:10.5px;color:#94a3b8;margin-top:3px;">Navigate India. Intelligently. Safely.</div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><div class="sf-brand">🦅 GARUDA · DeceptiCon · SIH 2026</div><div class="sf-tag">Navigate India. Intelligently. Safely.</div><div class="sf-pg">12 / 12</div></div>
+</div>
+
+</body>
+</html>
